@@ -14,7 +14,7 @@ function App() {
         <img src={logo} width="20%" alt="WCS logo" />
       </div>
       <div className="rsw-item">
-        <p>Welcome to your fresh, lightweight, React App ! &#127752;</p>
+        <p>Welcome to Fiverr! &#127752;</p>
       </div>
       <div className="rsw-item">
         <p>
