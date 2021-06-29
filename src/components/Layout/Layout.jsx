@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
 import Sidebar from '../Sidebar/Sidebar';
 import Users from '../Users/Users';
+import Login from '../Login/Login';
+import SignInForm from '../SignInForm/SignInForm';
 
 export default function Layout() {
   return (
@@ -14,6 +16,12 @@ export default function Layout() {
         <Switch>
           <Route exact path="/"></Route>
           <Route exact path="/users" component={Users} />
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route exact path="/signin">
+            <SignInForm />
+          </Route>
         </Switch>
       </div>
     </BrowserRouter>

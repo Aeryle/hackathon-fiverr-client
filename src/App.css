@@ -2,8 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-.homeBG{
+.homeBG {
   background-image: url('../images/whitehome.jpg');
-  background-repeat: no-repeat;
+  background-position: center;
+  background-repeat: repeat;
   background-size: cover;
+  background-attachment: fixed;
 }
