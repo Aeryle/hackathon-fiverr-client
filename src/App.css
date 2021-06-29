@@ -2,9 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-.home{
-  background-image: url('../images/homefiverr.jpg');
-  background-size: cover;
+.homeBG{
+  background-image: url('../images/whitehome.jpg');
   background-repeat: no-repeat;
+  background-size: cover;
 }
-
