@@ -1,12 +1,12 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router';
-import { user } from '../../API/requests';
+import { user } from '../../../API/requests';
+import Attachments from './Attachments';
 
 function OneUser() {
   const { id } = useParams();
-  const { isLoading, error, data } = useQuery(['user', id], user.getOne);
-  console.log(data);
+  const { isLoading, error, data } = useQuery(['user', { id }], user.getOne(id));
 
   if (isLoading) {
     return <p className="text-white">Loading...</p>;
@@ -22,12 +22,17 @@ function OneUser() {
 
   return (
     <div className="h-full mx-4">
-      {data.map((user) => (
-        <p key={user.id}>
-          {user.id}
-          {user.pseudo}
-        </p>
-      ))}
+      <h2>HELLO WORLD</h2>
+      <div>
+        <div className="flex justify-between">
+          <div>
+            <p>{data?.pseudo}</p>
+          </div>
+          <p>{data?.city}</p>
+        </div>
+        <Attachments />
+      </div>
+      <p>{data?.description}</p>
     </div>
   );
 }

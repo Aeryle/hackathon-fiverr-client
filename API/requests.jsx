@@ -4,12 +4,12 @@ const API_URL = import.meta.env.VITE_API_URL; //  || 'http://localhost:5000/api/
 
 export const user = {
   getAll: () => axios.get(`${API_URL}/users`).then((res) => res.data),
-  getOne: (id) => axios.get(`${API_URL}/users/${id}`).then((res) => res.data),
+  getOne: (id) => () => axios.get(`${API_URL}/users/${id}`).then((res) => res.data),
   create: async ({ user }) => axios.post(`${API_URL}/users`, user).then((res) => res.data),
 };
 
 export const attachment = {
-  getAll: () => axios.get(`${API_URL}/attachments`).then((res) => res.data),
+  getAll: (id) => () => axios.get(`${API_URL}/attachments/${id ? `userId=${id}` : ''})`).then((res) => res.data),
   getOne: (id) => axios.get(`${API_URL}/attachments/${id}`).then((res) => res.data),
   create: async ({ attachment }) => axios.post(`${API_URL}/attachments`, attachment).then((res) => res.data),
   delete: (id) => axios.delete(`${API_URL}/attachments/${id}`).then((res) => res.data),
