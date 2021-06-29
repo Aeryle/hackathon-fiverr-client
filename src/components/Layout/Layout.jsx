@@ -14,9 +14,7 @@ export default function Layout() {
       <Sidebar />
       <div className="mt-14 ml-14">
         <Switch>
-          <Route exact path="/">
-            <Users />
-          </Route>
+          <Route exact path="/"></Route>
           <Route exact path="/users" component={Users} />
           <Route exact path="/login">
             <Login />

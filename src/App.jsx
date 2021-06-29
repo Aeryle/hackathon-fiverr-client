@@ -9,7 +9,7 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div className=" w-full h-screen ">
+    <div className=" w-full h-screen homeBG">
       <QueryClientProvider client={queryClient}>
         <main className="rsw-container">
           <Layout />
