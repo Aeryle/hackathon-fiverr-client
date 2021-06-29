@@ -3,9 +3,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
 import './App.css';
-import Attachments from './components/Attachments';
-import Tags from './components/Tags';
-import Users from './components/Users';
+import Layout from './components/Layout/Layout';
 
 const queryClient = new QueryClient();
 
@@ -13,10 +11,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <main className="rsw-container">
-        hello world
-        <Users />
-        <Tags />
-        <Attachments />
+        <Layout />
       </main>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
