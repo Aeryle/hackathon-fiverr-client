@@ -5,6 +5,8 @@ import Navbar from '../Navbar/Navbar';
 import Sidebar from '../Sidebar/Sidebar';
 import OneUser from '../Users/OneUser';
 import Users from '../Users/Users';
+import Login from '../Login/Login';
+import SignInForm from '../SignInForm/SignInForm';
 
 export default function Layout() {
   return (
@@ -17,6 +19,12 @@ export default function Layout() {
           <Route exact path="/"></Route>
           <Route exact path="/users" component={Users} />
           <Route exact path="/users/:id" component={OneUser} />
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route exact path="/signin">
+            <SignInForm />
+          </Route>
         </Switch>
       </div>
     </BrowserRouter>
