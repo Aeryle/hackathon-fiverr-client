@@ -5,7 +5,6 @@ import { user } from '../../../API/requests';
 
 export default function Users() {
   const { isLoading, error, data } = useQuery('users', user.getAll);
-  console.log(data);
 
   if (isLoading) {
     return <p className="text-white">Loading...</p>;

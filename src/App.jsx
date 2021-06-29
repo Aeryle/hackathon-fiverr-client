@@ -9,12 +9,14 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <main className="rsw-container">
-        <Layout />
-      </main>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    <div className="homeBG w-full h-screen">
+      <QueryClientProvider client={queryClient}>
+        <main className="rsw-container">
+          <Layout />
+        </main>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </div>
   );
 }
 
