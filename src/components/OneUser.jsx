@@ -1,10 +1,11 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router';
 import { user } from '../../API/requests';
 
-function Users() {
-  const { isLoading, error, data } = useQuery('users', user.getAll);
+function OneUser() {
+  const { id } = useParams();
+  const { isLoading, error, data } = useQuery(['user', id], user.getOne);
   console.log(data);
 
   if (isLoading) {
@@ -27,11 +28,8 @@ function Users() {
           {user.pseudo}
         </p>
       ))}
-      <Link to="/user">
-        <p>Click here to see One User</p>
-      </Link>
     </div>
   );
 }
 
-export default Users;
+export default OneUser;
