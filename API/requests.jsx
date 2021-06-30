@@ -17,6 +17,6 @@ export const attachment = {
 };
 
 export const tag = {
-  getAll: () => axios.get(`${API_URL}/tags`).then((res) => res.data),
+  getAll: () => () => axios.get(`${API_URL}/tags`).then((res) => res.data),
   getOne: (id) => axios.get(`${API_URL}/tags/${id}`).then((res) => res.data),
 };
