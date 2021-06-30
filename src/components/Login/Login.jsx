@@ -53,11 +53,6 @@ export default function Login() {
           </button>
         </div>
       </form>
-      <div>
-        <button className="text-white ml-5 relative">
-          <a href="/">X</a>
-        </button>
-      </div>
     </div>
   );
 }

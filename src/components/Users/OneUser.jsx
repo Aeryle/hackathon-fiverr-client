@@ -24,9 +24,9 @@ function OneUser() {
       <div className="border rounded-md p-3 flex flex-col  w-2/4 bg-gray-800">
         <div className="flex justify-between">
           <div>
-            <p>Pseudo:</p>
-            <p>Ville:</p>
-            <p>description:</p>
+            <p>Nickname:</p>
+            <p>City:</p>
+            <p>Description:</p>
           </div>
           <div>
             <p className="text-xl">{data?.pseudo}</p>
@@ -34,7 +34,7 @@ function OneUser() {
             <p>{data?.description}</p>
           </div>
         </div>
-        <button className="my-3 p-2 rounded-md border hover:bg-green-500">Contacter</button>
+        <button className="my-3 p-2 rounded-md border hover:bg-green-500">Send a Message</button>
       </div>
     </div>
   );
