@@ -23,6 +23,9 @@ function OneUser() {
   return (
     <div className="w-full h-screen text-white flex justify-center items-center">
       <div className="border rounded-md p-3 flex flex-col  w-2/4 bg-gray-800">
+        <div className="overflow-x-hidden w-full h-96 border">
+          <Attachments />
+        </div>
         <div className="flex justify-between">
           <div>
             <p>Nickname:</p>
@@ -33,7 +36,6 @@ function OneUser() {
             <p className="text-xl">{data?.pseudo}</p>
             <p>{data?.city}</p>
             <p>{data?.description}</p>
-            <Attachments />
           </div>
         </div>
         <button className="my-3 p-2 rounded-md border hover:bg-green-500">Send a Message</button>

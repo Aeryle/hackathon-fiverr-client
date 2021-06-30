@@ -22,12 +22,11 @@ export default function Attachments() {
   }
 
   return (
-    <div className="flex flex-row-reverse">
+    <div className="w-full h-full overflow-y-auto">
       {data?.map((data) => (
-        <>
-          <p>{data.type}</p>
-          <img key={data.id} src={data.url} alt={data.id} width="150" height="100"></img>
-        </>
+        <div key={data.id}>
+          <img src={data.url} alt={data.id} className="w-full h-96"></img>
+        </div>
       ))}
     </div>
   );
