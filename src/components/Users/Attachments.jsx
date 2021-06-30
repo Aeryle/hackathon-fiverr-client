@@ -4,14 +4,10 @@ import { attachment } from '../../../API/requests';
 import { useParams } from 'react-router';
 
 export default function Attachments() {
-  //   const [attachments, setAttachments] = useState(null);
-  const { id } = useParams();
+  const { userId } = useParams();
 
-  const { isLoading, error, data } = useQuery(
-    ['users', id],
-    () => attachment.getAll(id),
-    //    {onSuccess: (data) => setAttachments(data[0]),}
-  );
+  const { isLoading, error, data } = useQuery(['attachments', userId], attachment.getAll(userId));
+  console.log(data);
 
   if (isLoading) {
     return <p className="text-white">Loading...</p>;
@@ -25,5 +21,14 @@ export default function Attachments() {
     );
   }
 
-  return <div>HELLO ATTACHMENTS</div>;
+  return (
+    <div className="flex flex-row-reverse">
+      {data?.map((data) => (
+        <>
+          <p>{data.type}</p>
+          <img key={data.id} src={data.url} alt={data.id} width="150" height="100"></img>
+        </>
+      ))}
+    </div>
+  );
 }
