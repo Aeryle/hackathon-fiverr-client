@@ -6,7 +6,6 @@ import { useQuery } from 'react-query';
 export default function Sidebar() {
   const [isClicked, setIsClicked] = useState(false);
   const { isLoading, error, data } = useQuery('tags', tag.getAll(10));
-  console.log(data);
 
   if (isLoading) {
     return <p className="text-white">Loading...</p>;

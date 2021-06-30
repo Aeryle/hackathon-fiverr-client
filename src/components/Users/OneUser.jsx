@@ -2,7 +2,6 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router';
 import { user } from '../../../API/requests';
-import Attachments from './Attachments';
 
 function OneUser() {
   const { id } = useParams();
@@ -21,18 +20,22 @@ function OneUser() {
   }
 
   return (
-    <div className="h-full mx-4">
-      <h2>HELLO WORLD</h2>
-      <div>
+    <div className="w-full h-screen text-white flex justify-center items-center">
+      <div className="border rounded-md p-3 flex flex-col  w-2/4 bg-gray-800">
         <div className="flex justify-between">
           <div>
-            <p>{data?.pseudo}</p>
+            <p>Pseudo:</p>
+            <p>Ville:</p>
+            <p>description:</p>
           </div>
-          <p>{data?.city}</p>
+          <div>
+            <p className="text-xl">{data?.pseudo}</p>
+            <p>{data?.city}</p>
+            <p>{data?.description}</p>
+          </div>
         </div>
-        <Attachments />
+        <button className="my-3 p-2 rounded-md border hover:bg-green-500">Contacter</button>
       </div>
-      <p>{data?.description}</p>
     </div>
   );
 }
