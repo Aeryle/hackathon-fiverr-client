@@ -6,7 +6,7 @@ import { useParams } from 'react-router';
 export default function Attachments() {
   const { userId } = useParams();
 
-  const { isLoading, error, data } = useQuery(['user', userId], attachment.getAll(userId));
+  const { isLoading, error, data } = useQuery(['attachments', userId], attachment.getAll(userId));
   console.log(data);
 
   if (isLoading) {
