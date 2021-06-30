@@ -2,7 +2,6 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { attachment } from '../../../API/requests';
 import { useParams } from 'react-router';
-import { useState } from 'react';
 
 export default function Attachments() {
   //   const [attachments, setAttachments] = useState(null);
@@ -13,7 +12,6 @@ export default function Attachments() {
     () => attachment.getAll(id),
     //    {onSuccess: (data) => setAttachments(data[0]),}
   );
-  console.log(data);
 
   if (isLoading) {
     return <p className="text-white">Loading...</p>;
