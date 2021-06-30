@@ -18,18 +18,10 @@ export default function Layout() {
     <BrowserRouter>
       <Navbar />
       <Sidebar />
-<<<<<<< HEAD
-
-      <div className="mt-14 ml-14">
-        <Switch>
-          <Route exact path="/">
-            <SearchInput />
-=======
       <div className="mt-14 ml-14">
         <Switch>
           <Route exact path="/">
             <AllUser />
->>>>>>> dev
           </Route>
           <Route exact path="/users" component={Users} />
           <Route exact path="/users/:id" component={OneUser} />
