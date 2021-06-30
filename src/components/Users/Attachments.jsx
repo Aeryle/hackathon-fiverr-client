@@ -2,17 +2,11 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { attachment } from '../../../API/requests';
 import { useParams } from 'react-router';
-import { useState } from 'react';
 
 export default function Attachments() {
-  //   const [attachments, setAttachments] = useState(null);
-  const { id } = useParams();
+  const { userId } = useParams();
 
-  const { isLoading, error, data } = useQuery(
-    ['users', id],
-    () => attachment.getAll(id),
-    //    {onSuccess: (data) => setAttachments(data[0]),}
-  );
+  const { isLoading, error, data } = useQuery(['user', userId], attachment.getAll(userId));
   console.log(data);
 
   if (isLoading) {
@@ -27,5 +21,11 @@ export default function Attachments() {
     );
   }
 
-  return <div>HELLO ATTACHMENTS</div>;
+  return (
+    <div className="text-center">
+      {data?.map((data) => (
+        <p key={data.id}>{data.type}</p>
+      ))}
+    </div>
+  );
 }

@@ -30,9 +30,9 @@ function OneUser() {
           </div>
           <p>{data?.city}</p>
         </div>
-        <Attachments />
       </div>
       <p>{data?.description}</p>
+      <Attachments />
     </div>
   );
 }

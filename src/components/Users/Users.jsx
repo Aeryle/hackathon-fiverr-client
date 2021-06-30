@@ -24,7 +24,7 @@ export default function Users() {
         <div key={user.id}>
           <Link to="/users/:id">
             <div className=" w-5/6 font-bold mt-2 mx-8 sm:mx-0 bg-gray-800 text-white rounded-md">
-              <img src="images/homefiverr.jpg" alt="FiverrBackground" className="w-full rounded-t-md " />
+              <img src="./../images/homefiverr.jpg" alt="FiverrBackground" className="w-full rounded-t-md " />
               <p className="mt-4 text-xl">{user.pseudo}</p>
               <p>
                 Lives in <span className="font-bold">{user.city}</span>
