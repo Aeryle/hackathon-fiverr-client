@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router';
 import { user } from '../../../API/requests';
+import Attachments from './Attachments';
 
 function OneUser() {
   const { id } = useParams();
@@ -32,11 +33,9 @@ function OneUser() {
             <p className="text-xl">{data?.pseudo}</p>
             <p>{data?.city}</p>
             <p>{data?.description}</p>
+            <Attachments />
           </div>
         </div>
-      </div>
-      <p>{data?.description}</p>
-      <Attachments />
         <button className="my-3 p-2 rounded-md border hover:bg-green-500">Contacter</button>
       </div>
     </div>

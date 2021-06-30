@@ -6,9 +6,13 @@ import SearchInput from '../SearchInput';
 import { useForm } from 'react-hook-form';
 
 export default function Users() {
+  const unsplashimg = {
+    src: 'https://source.unsplash.com/1600x900/?business',
+    alt: 'random unsplash image',
+  };
+
   const { register, watch } = useForm();
 
-  const searchInput = watch('search');
   const { isLoading, error, data } = useQuery('users', user.getAll);
   const { id } = useParams();
 
@@ -29,9 +33,9 @@ export default function Users() {
       <SearchInput register={register} name="search" />
       {data.map((user) => (
         <div key={user.id}>
-          <Link to={`/users/:${id}`}>
+          <Link to={`/users/${user.id}`}>
             <div className=" w-5/6 font-bold mt-2 mx-8 sm:mx-0 bg-gray-800 text-white rounded-md">
-              <img src="./../images/homefiverr.jpg" alt="FiverrBackground" className="w-full rounded-t-md " />
+              <img src={unsplashimg.src} alt={unsplashimg.alt} className="w-full rounded-t-md " />
               <p className="mt-4 text-xl">{user.pseudo}</p>
               <p>
                 Lives in <span className="font-bold">{user.city}</span>
