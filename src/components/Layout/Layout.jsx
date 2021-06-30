@@ -7,11 +7,7 @@ import OneUser from '../Users/OneUser';
 import Users from '../Users/Users';
 import Login from '../Login/Login';
 import SignInForm from '../SignInForm/SignInForm';
-<<<<<<< HEAD
-import SearchInput from '../SearchInput';
-=======
 import AllUser from '../AllUser/AllUser';
->>>>>>> dev
 
 export default function Layout() {
   return (
