@@ -1,28 +1,50 @@
-import React from "react";
-import { useForm } from "react-hook-form";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
+import { useMutation } from 'react-query';
+import { useHistory, Link } from 'react-router-dom';
 
-export default function Login(): JSX.Element {
+import { auth } from '../../../API/requests';
+import { AUTHENTICATE } from '../../store/ACTIONS';
+
+export default function Login() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
 
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  const onSubmit = (data: object) => {
-    // eslint-disable-next-line no-console
-    console.log(data);
-  };
+  const { mutate } = useMutation(
+    ({ email, password }) =>
+      auth.login({
+        email,
+        password,
+      }),
+    {
+      onSuccess: (data) => {
+        dispatch({
+          type: AUTHENTICATE,
+          payload: data,
+        });
+
+        history.push('/');
+      },
+    },
+  );
+
+  const onSubmit = (data) => mutate(data);
 
   return (
     <div className="h-screen w-full flex justify-center items-center">
       <form
         className=" flex text-white items-center px-8 h-auto rounded-lg flex-col bg-gray-800 border    border-white"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+        onSubmit={handleSubmit(onSubmit)}>
         <div className="text-center my-2 mt-8">
           <h2 className="text-2xl mb-2">Connection</h2>
-          <div className="border w-32 mx-auto mb-8"></div>
+          <div className="border w-32 mx-auto mb-8" />
         </div>
         <div className="flex flex-col justify-center w-full">
           <div className="flex flex-col my-2">
@@ -31,11 +53,9 @@ export default function Login(): JSX.Element {
               type="email"
               id="email"
               placeholder="Email..."
-              {...register("email", { required: true })}
+              {...register('email', { required: true })}
             />
-            <p className="text-white text-sm ">
-              {errors.email?.type === "required" && "*email is required"}
-            </p>
+            <p className="text-white text-sm ">{errors.email?.type === 'required' && '*email is required'}</p>
           </div>
           <div className="flex flex-col my-2">
             <input
@@ -43,43 +63,27 @@ export default function Login(): JSX.Element {
               type="password"
               id="password"
               placeholder="Mot de passe"
-              {...register("password", { required: true })}
+              {...register('password', { required: true })}
             />
-            <p className="text-white text-sm ">
-              {errors.password?.type === "required" &&
-                "*Saisir un mot de passe"}
-            </p>
+            <p className="text-white text-sm ">{errors.password?.type === 'required' && '*Saisir un mot de passe'}</p>
           </div>
           <div className="flex flex-col text-center mt-2 mb-8">
             <p className="text-xs">
               {" Je n'ai pas de compte, je m'en crée un "}
               <span className="text-red-400">
-                <a href="/signin">ici</a>
+                <Link to="/signin">ici</Link>
               </span>
             </p>
             <p className="text-xs">
-              Identifiants introuvables ? Par{" "}
-              <span className="text-red-400">ici</span>
+              Identifiants introuvables ? Par <span className="text-red-400">ici</span>
             </p>
           </div>
 
-          <button
-            className="border py-1 w-64 rounded-lg my-2 mb-8 font-bold"
-            type="submit"
-          >
+          <button className="border py-1 w-64 rounded-lg my-2 mb-8 font-bold" type="submit">
             Se connecter
           </button>
-          <button
-            className="border py-1 w-64 rounded-lg my-2 px-5 mb-2 flex justify-between items-center"
-            type="submit"
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 12 12"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+          <button className="border py-1 w-64 rounded-lg my-2 px-5 mb-2 flex justify-between items-center" type="submit">
+            <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -91,17 +95,8 @@ export default function Login(): JSX.Element {
               Continuer avec <span className="font-bold">Google</span>
             </div>
           </button>
-          <button
-            className="border py-1 w-64 rounded-lg my-2 mb-8 px-5 flex justify-between items-center text-md"
-            type="submit"
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 35 35"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+          <button className="border py-1 w-64 rounded-lg my-2 mb-8 px-5 flex justify-between items-center text-md" type="submit">
+            <svg width="20" height="20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 fillRule="evenodd"
                 clipRule="evenodd"

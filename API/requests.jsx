@@ -19,3 +19,8 @@ export const tag = {
   getAll: () => axios.get(`${API_URL}/tags`).then((res) => res.data),
   getOne: (id) => axios.get(`${API_URL}/tags/${id}`).then((res) => res.data),
 };
+
+export const auth = {
+  login: (data) => axios.post(`${API_URL}/auth/login`, data).then((res) => res.data),
+  register: (data) => axios.post(`${API_URL}/auth/register`, data).then((res) => res.data),
+};

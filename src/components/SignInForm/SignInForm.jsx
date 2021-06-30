@@ -1,15 +1,15 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 
-export default function SignInForm(): JSX.Element {
+export default function SignInForm() {
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm({});
 
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  const onSubmit = (data: object) => {
+  const onSubmit = (data) => {
     // eslint-disable-next-line no-console
     console.log(data);
   };
@@ -21,7 +21,7 @@ export default function SignInForm(): JSX.Element {
         onSubmit={handleSubmit(onSubmit)}>
         <div className="text-center my-2 mt-8">
           <h2 className="text-2xl mb-2">Inscription</h2>
-          <div className="border w-32 mx-auto"></div>
+          <div className="border w-32 mx-auto" />
         </div>
         <div className="flex flex-col justify-center w-full">
           <div className="flex flex-col my-2 text-sm">
@@ -88,7 +88,7 @@ export default function SignInForm(): JSX.Element {
           <p className="text-xs">
             Déjà un compte ? Connecte toi{' '}
             <span className="text-red-400">
-              <a href="/login">ici</a>
+              <Link to="/login" />
             </span>
           </p>
         </div>

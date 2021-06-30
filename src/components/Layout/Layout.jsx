@@ -16,7 +16,7 @@ export default function Layout() {
       <OneUser />
       <div className="mt-14 ml-14">
         <Switch>
-          <Route exact path="/"></Route>
+          <Route exact path="/" />
           <Route exact path="/users" component={Users} />
           <Route exact path="/users/:id" component={OneUser} />
           <Route exact path="/login">
