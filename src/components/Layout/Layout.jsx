@@ -13,7 +13,6 @@ export default function Layout() {
     <BrowserRouter>
       <Navbar />
       <Sidebar />
-      <OneUser />
       <div className="mt-14 ml-14">
         <Switch>
           <Route exact path="/"></Route>
