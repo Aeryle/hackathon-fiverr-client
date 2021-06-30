@@ -2,8 +2,13 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { Link, useParams } from 'react-router-dom';
 import { user } from '../../../API/requests';
+import SearchInput from '../SearchInput';
+import { useForm } from 'react-hook-form';
 
 export default function Users() {
+  const { register, watch } = useForm();
+
+  const searchInput = watch('search');
   const { isLoading, error, data } = useQuery('users', user.getAll);
   const { id } = useParams();
 
@@ -21,6 +26,7 @@ export default function Users() {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 text-center ml-48 mr-20 gap-y-16  ">
+      <SearchInput register={register} name="search" />
       {data.map((user) => (
         <div key={user.id}>
           <Link to={`/users/:${id}`}>
