@@ -1,24 +1,48 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useMutation } from 'react-query';
+
+import { auth } from '../../../API/requests';
+import { AUTHENTICATE } from '../../store/ACTIONS';
 
 export default function SignInForm() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const {
     register,
     formState: { errors },
+    getValues,
     handleSubmit,
   } = useForm({});
 
-  const onSubmit = (data) => {
-    // eslint-disable-next-line no-console
-    console.log(data);
-  };
+  const { mutate } = useMutation(
+    ({ pseudo, email, password, city, job, description }) =>
+      auth.register({
+        pseudo,
+        email,
+        password,
+        city,
+        job,
+        description,
+      }),
+    {
+      onSuccess: (data) => {
+        dispatch({
+          type: AUTHENTICATE,
+          payload: data,
+        });
+
+        history.push('/');
+      },
+    },
+  );
 
   return (
     <div className="flex h-screen w-full justify-center items-center">
-      <form
-        className=" flex text-white items-center px-8 h-auto rounded-lg flex-col bg-gray-800 border    border-white"
-        onSubmit={handleSubmit(onSubmit)}>
+      <form className="flex text-white items-center px-8 h-auto rounded-lg flex-col bg-gray-800 border border-white" onSubmit={handleSubmit(mutate)}>
         <div className="text-center my-2 mt-8">
           <h2 className="text-2xl mb-2">Inscription</h2>
           <div className="border w-32 mx-auto" />
@@ -26,74 +50,79 @@ export default function SignInForm() {
         <div className="flex flex-col justify-center w-full">
           <div className="flex flex-col my-2 text-sm">
             <input
-              className={`h-8 w-64 rounded-lg  text-black mx-auto px-2 border
-              ${errors.firstName && 'border-red-600'}
-              `}
-              placeholder="Prénom..."
+              className={`h-8 w-64 rounded-lg text-black mx-auto px-2 border ${errors.pseudo && 'ring ring-red-600'}`}
+              placeholder="Username"
               type="text"
-              id="firstName"
-              {...register('firstName', { required: true })}
+              {...register('pseudo', { required: true })}
             />
-            <p className="text-white text-sm ">{errors.firstName && 'Veuillez entrer votre prénom'}</p>
+            <p className="text-white text-sm">{errors.pseudo && 'Please enter your username'}</p>
           </div>
           <div className="flex flex-col my-2 text-sm">
             <input
-              className={`h-8 w-64 rounded-lg  text-black mx-auto px-2 border
-              ${errors.lastName && 'border-red-600'}
-              `}
-              placeholder="Nom..."
-              type="text"
-              id="lastName"
-              {...register('lastName', { required: true })}
-            />
-            <p className="text-white text-sm ">{errors.lastName && 'Veuillez entrer votre nom'}</p>
-          </div>
-          <div className="flex flex-col my-2 text-sm">
-            <input
-              className={`h-8 w-64 rounded-lg  text-black mx-auto px-2 border
-              ${errors.email && 'border-red-600'}
-              `}
-              placeholder="Email..."
+              className={`h-8 w-64 rounded-lg text-black mx-auto px-2 border ${errors.email && 'ring ring-red-600'}`}
+              placeholder="Email"
               type="email"
               id="email"
               {...register('email', { required: true })}
             />
-            <p className="text-white text-sm ">{errors.email && 'Veuillez saisir un email'}</p>
+            <p className="text-white text-sm">{errors.email && 'Please enter your email'}</p>
           </div>
           <div className="flex flex-col my-2 text-sm">
             <input
-              className={`
-              h-8 w-64 rounded-lg text-black mx-auto px-2 border
-              ${errors.password && 'border-red-600'}
-              `}
-              placeholder="Mot de passe..."
+              className={`h-8 w-64 rounded-lg text-black mx-auto px-2 border ${errors.password && 'ring ring-red-600'}`}
+              placeholder="Password"
               type="password"
-              id="password"
-              {...register('password', { required: true })}
+              {...register('password', { required: true, minLength: 6 })}
             />
-            <p className="text-white text-sm ">{errors.password && 'Entrez au minimum 6 caractère'}</p>
+            <p className="text-white text-sm">{errors.password && 'Please enter at least 6 characters'}</p>
           </div>
           <div className="flex flex-col my-2 text-sm">
             <input
-              className="h-8 w-64 rounded-lg text-black mx-auto px-2"
-              placeholder="Confirmation du mot de passe..."
+              className={`h-8 w-64 rounded-lg text-black mx-auto px-2 ${errors.passwordConfirm && 'ring ring-red-600'}`}
+              placeholder="Password confirmation"
               type="password"
-              id="confirmPassword"
-              {...register('confirmPassword', { required: 'password' })}
+              {...register('confirmPassword', {
+                required: 'password',
+                validate: (value) => value === getValues('password'),
+              })}
             />
-            <p className="text-white text-sm ">{errors.confirmPassword && 'Confirmation invalide'}</p>
+            <p className="text-white text-sm">{errors.confirmPassword && 'Passwords do not match'}</p>
+          </div>
+          <div className="flex flex-col my-2 text-sm">
+            <input
+              className={`h-8 w-64 rounded-lg text-black mx-auto px-2 ${errors.city && 'ring ring-red-600'}`}
+              placeholder="City"
+              {...register('city', { required: true, pattern: /[a-z]+/i })}
+            />
+            <p className="text-white text-sm">{errors.city && 'Please enter your city'}</p>
+          </div>{' '}
+          <div className="flex flex-col my-2 text-sm">
+            <input
+              className={`h-8 w-64 rounded-lg text-black mx-auto px-2 ${errors.job && 'ring ring-red-600'}`}
+              placeholder="Job"
+              {...register('job', { required: true, pattern: /[a-z]+/i })}
+            />
+            <p className="text-white text-sm">{errors.job && 'Please enter your job'}</p>
+          </div>{' '}
+          <div className="flex flex-col my-2 text-sm">
+            <input
+              className={`h-8 w-64 rounded-lg text-black mx-auto px-2 ${errors.description && 'ring ring-red-600'}`}
+              placeholder="Describe yourself"
+              {...register('description', { required: true, minLength: 20, maxLength: 200 })}
+            />
+            <p className="text-white text-sm">{errors.description && 'Please enter a description'}</p>
           </div>
         </div>
         <div className="flex flex-col text-center mt-2 mb-2">
           <p className="text-xs">
-            Déjà un compte ? Connecte toi{' '}
+            Already have an account?{' '}
             <span className="text-red-400">
-              <Link to="/login" />
+              <Link to="/login">Login</Link>
             </span>
           </p>
         </div>
         <button className={`border py-1 w-64 rounded-lg my-2 mb-2 font-bold`} type="submit">
-          {`S'inscrire`}
+          {"S'inscrire"}
         </button>
         <button className="border py-1 w-64 rounded-lg my-2 px-5 mb-2 flex justify-between items-center" type="submit">
           <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">

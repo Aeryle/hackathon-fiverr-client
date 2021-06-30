@@ -4,7 +4,6 @@ const initialState = {
   id: '',
   pseudo: '',
   email: '',
-  status: 'OFFLINE',
   city: '',
   job: '',
 };
