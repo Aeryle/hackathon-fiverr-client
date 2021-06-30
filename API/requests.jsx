@@ -9,14 +9,15 @@ export const user = {
 };
 
 export const attachment = {
-  getAll: (id) => () => axios.get(`${API_URL}/attachments/${id ? `userId=${id}` : ''})`).then((res) => res.data),
+  getAll: (userId) => () => axios.get(`${API_URL}/attachments${userId ? `?userId=${userId}` : ''}`).then((res) => res.data),
   getOne: (id) => axios.get(`${API_URL}/attachments/${id}`).then((res) => res.data),
   create: async ({ attachment }) => axios.post(`${API_URL}/attachments`, attachment).then((res) => res.data),
   delete: (id) => axios.delete(`${API_URL}/attachments/${id}`).then((res) => res.data),
+  getOneFromOneUser: (id, userId) => () => axios.get(`${API_URL}/attachments/${id}${userId ? `?userId=${userId}` : ''}`).then((res) => res.data),
 };
 
 export const tag = {
-  getAll: () => axios.get(`${API_URL}/tags`).then((res) => res.data),
+  getAll: () => () => axios.get(`${API_URL}/tags`).then((res) => res.data),
   getOne: (id) => axios.get(`${API_URL}/tags/${id}`).then((res) => res.data),
 };
 
