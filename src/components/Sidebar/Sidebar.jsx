@@ -24,7 +24,7 @@ export default function Sidebar() {
   };
 
   return (
-    <div className="h-full w-1/4 fixed mt-14 z-0">
+    <div className="h-full w-1/4 fixed z-0">
       {!isClicked ? (
         <div className="h-screen w-14 bg-gray-800">
           <button onClick={handleClicked} className="w-full flex justify-center items-center text-center text-white p-2">
