@@ -1,13 +1,22 @@
-const initialState = false
+import { AUTHENTICATE } from './ACTIONS';
 
-export const TECH_CLICKED = 'TECH_CLICKED'
+const initialState = {
+  id: '',
+  pseudo: '',
+  email: '',
+  city: '',
+  job: '',
+};
 
+export default function reducer(state = initialState, action) {
+  switch (action.type) {
+    case AUTHENTICATE:
+      return {
+        ...state,
+        ...action.payload,
+      };
 
-export function homeReducer(state = initialState, action) {
-        switch (action.type) {
-            case TECH_CLICKED:
-                return[...state, ...action.payload]
-            default:
-                return state
-        }
-    }
+    default:
+      return state;
+  }
+}
